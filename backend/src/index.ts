@@ -65,3 +65,8 @@ app.use('/api/v1', apiRouter);
 app.listen(3000, () => {
   console.log('starting server :3000');
 });
+
+
+export function Add(a:number,b:number) {
+  return a + b;
+}

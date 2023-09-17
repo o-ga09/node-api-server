@@ -16,7 +16,7 @@
     "dev": "bun src/index.ts",
     "build": "bun build --compile ./src/index.ts --outfile=app",
     "test": "bun test",
-    "eslint": "bun eslint src/**/*.ts",
+    "lint": "bun eslint src/**/*.ts",
     "prettier": "bun prettier . --write",
     "lint-fix": "npx eslint --fix src/**/*.ts && npx prettier . --write"
   },
