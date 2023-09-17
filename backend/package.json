@@ -3,18 +3,30 @@
   "module": "index.ts",
   "type": "module",
   "devDependencies": {
-    "bun-types": "latest"
+    "@typescript-eslint/eslint-plugin": "^6.7.0",
+    "bun-types": "latest",
+    "eslint": "^8.49.0",
+    "eslint-config-standard-with-typescript": "^39.0.0",
+    "eslint-plugin-import": "^2.28.1",
+    "eslint-plugin-n": "^16.1.0",
+    "eslint-plugin-promise": "^6.1.1",
+    "typescript": "^5.2.2"
   },
   "scripts": {
     "dev": "bun src/index.ts",
     "build": "bun build --compile ./src/index.ts --outfile=app",
-    "test": "bun test"
+    "test": "bun test",
+    "eslint": "bun eslint src/**/*.ts",
+    "prettier": "bun prettier . --write",
+    "lint-fix": "npx eslint --fix src/**/*.ts && npx prettier . --write"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
   },
   "dependencies": {
+    "@types/express": "^4.17.17",
     "express": "^4.18.2",
-    "jest": "^29.7.0"
+    "jest": "^29.7.0",
+    "prettier": "^3.0.3"
   }
 }
