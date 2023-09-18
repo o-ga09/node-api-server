@@ -15,7 +15,7 @@ export interface TaskDriver {
 
 export class TaskDriverImpl implements TaskDriver {
     constructor(
-        readonly prizma = new PrismaClient(),
+        readonly prizma: PrismaClient,
     ) {}
     
     async getAll(): Promise<DriverTask[]> {
