@@ -1,6 +1,6 @@
 import express from 'express';
 import { RootController } from './controller/system';
-import { UserController } from './controller/user';
+import { UserContainer } from '../DI/container';
 
 
 export class Server {
@@ -9,7 +9,7 @@ export class Server {
     readonly UserHandler = express.Router();
     readonly apiRouter = express.Router();
     readonly r = new RootController();
-    readonly u = new UserController();
+    readonly u = new UserContainer();
     
     constructor() {
         this.apiRouter.use('/', this.RootHandler);
@@ -19,18 +19,19 @@ export class Server {
     Run() {
         // GET リクエスト
         this.RootHandler.get('/', this.r.healthCheck);
+        this.UserHandler.get('/',this.u.handler.getAllUsers);
         
         // パスパラメータを取得する
-        this.UserHandler.get('/:id',this.u.getAllUsers);
+        this.UserHandler.get('/:id',this.u.handler.getById);
         
         // POST リクエスト
-        this.UserHandler.post('/:id',this.u.CreateUser);
+        this.UserHandler.post('/:id',this.u.handler.CreateUser);
         
         // PUT リクエスト
-        this.UserHandler.put('/:id',this.u.UpdateUser);
+        this.UserHandler.put('/:id',this.u.handler.UpdateUser);
         
         // DELETE リクエスト
-        this.UserHandler.delete('/:id',this.u.DeleteUser);
+        this.UserHandler.delete('/:id',this.u.handler.DeleteUser);
         
         
         this.app.use('/api/v1', this.apiRouter);

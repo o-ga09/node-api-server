@@ -1,5 +1,21 @@
+import { Usecase } from "../../usecase/usecase";
+
 export class UserController {
+
+    constructor(
+        // eslint-disable-next-line no-unused-vars
+        readonly usecase:Usecase,
+    ) {}
     getAllUsers(req: any, res: { send: (_: string) => void }) {
+        const id = req.params.id;
+
+        console.log('===============');
+        console.log('rcv id : ' + id);
+        console.log('============== ');
+        res.send('rcv id' + id);
+    }
+
+    getById(req: any, res: { send: (_: string) => void }) {
         const id = req.params.id;
 
         console.log('===============');
