@@ -48,14 +48,46 @@ export class TaskDriverImpl implements TaskDriver {
         const task = new DriverTask(record?.id,record?.name,record?.desc,record?.status,record?.createdAt,record?.updatedAt);
         return task;
     }
-    createTask(param: RequestDriverParam): Promise<ResponseDriver> {
-        throw new Error("Method not implemented.");
+
+    async createTask(param: RequestDriverParam): Promise<ResponseDriver> {
+        await this.prizma.task.create({
+            data: {
+                name: param.name,
+                desc: param.desc,
+                status: param.status,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+        });
+        const status = new ResponseDriver("Created",200);
+        return status;
     }
-    updateTask(id: number, param: RequestDriverParam): Promise<ResponseDriver> {
-        throw new Error("Method not implemented.");
+
+    async updateTask(id: number, param: RequestDriverParam): Promise<ResponseDriver> {
+        await this.prizma.task.update({
+            where: {
+                id: id,
+            },
+            data: {
+                name: param.name,
+                desc: param.desc,
+                status: param.status,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+        });
+        const status = new ResponseDriver("Updated",200);
+        return status;
     }
-    deleteTask(id: Number): Promise<ResponseDriver> {
-        throw new Error("Method not implemented.");
+
+    async deleteTask(id: number): Promise<ResponseDriver> {
+        await this.prizma.task.delete({
+            where: {
+                id: id,
+            },
+        });
+        const status = new ResponseDriver("Deleted",200);
+        return status;
     }
 
 }
