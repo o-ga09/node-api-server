@@ -23,7 +23,9 @@ describe("タスクをIdで取得する", () => {
         const inputPort = {} as InputPort;
         const getByIdMock = jest.fn();
         inputPort.getById = getByIdMock;
-        const mockResult = new Task(1,"test","hoge",1);
+
+        const mockDate = new Date(2023,9,18,1,2,3);
+        const mockResult = new Task(1,"test","hoge",1,mockDate,mockDate);
         getByIdMock.mockResolvedValueOnce(mockResult);
         // when(getAllMock).calledWith().mockResolvedValueOnce([]);
         

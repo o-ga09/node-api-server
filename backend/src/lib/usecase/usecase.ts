@@ -1,15 +1,15 @@
-import { RequestParam, Task } from "../domain/entity";
+import { RequestParam, Task, Response, TaskId } from "../domain/entity";
 
 export interface InputPort {
-    getAll():Promise<Task>
+    getAll():Promise<Task[]>
     // eslint-disable-next-line no-unused-vars
-    getById(id:Number): Promise<Task>;
+    getById(id:TaskId): Promise<Task>;
     // eslint-disable-next-line no-unused-vars
     createTask(param: RequestParam): Promise<Response>;
     // eslint-disable-next-line no-unused-vars
-    updateTask(id:Number, param: RequestParam): Promise<Response>;
+    updateTask(id:TaskId, param: RequestParam): Promise<Response>;
     // eslint-disable-next-line no-unused-vars
-    deleteTask(id:Number): Promise<Response>;
+    deleteTask(id:TaskId): Promise<Response>;
 }
 
 
@@ -19,13 +19,14 @@ export class Usecase {
         this.inputPort = inputport;
     }
     
-    async getAll():Promise<Task> {
+    async getAll():Promise<Task[]> {
         const tasks = await this.inputPort.getAll();       
-        return tasks;
+        return tasks ;
     }
     
     async getById(id: number):Promise<Task> {
-        const task = await this.inputPort.getById(id);
+        const taskId = new TaskId(id);
+        const task = await this.inputPort.getById(taskId);
         return task;
     }
     
@@ -35,12 +36,14 @@ export class Usecase {
     }
     
     async updatedTask(id: number, param: RequestParam) {
-        const status = await this.inputPort.updateTask(id,param);
+        const taskId = new TaskId(id);
+        const status = await this.inputPort.updateTask(taskId,param);
         return status;
     }
 
     async deleteTask(id: number):Promise<Response> {
-        const status = await this.inputPort.deleteTask(id);
+        const taskId = new TaskId(id);
+        const status = await this.inputPort.deleteTask(taskId);
         return status;
     }
 }
