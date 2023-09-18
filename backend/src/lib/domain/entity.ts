@@ -20,17 +20,17 @@ export class Task {
     readonly taskCreatedAt: TaskCreatedAt;
     readonly taskUpdatedAt: TaskUpdatedAt;
 
-    constructor(id:Number,name:string,desc:string,status:Number) {
+    constructor(id:Number,name:string,desc:string,status:Number,createdAt:Date,updatedAt:Date) {
         this.taskId = new TaskId(id);
         this.taskName = new TaskName(name);
         this.taskDesc = new TaskDesc(desc);
         this.taskStatus = new TaskStatus(status);
-        this.taskCreatedAt = new TaskCreatedAt();
-        this.taskUpdatedAt = new TaskUpdatedAt();
+        this.taskCreatedAt = new TaskCreatedAt(createdAt);
+        this.taskUpdatedAt = new TaskUpdatedAt(updatedAt);
     }
 }
 
-class UserId {
+export class UserId {
     readonly Value: Number;
 
     constructor(value:Number) {
@@ -38,7 +38,7 @@ class UserId {
     }
 }
 
-class UserName {
+export class UserName {
     readonly Value: string;
 
     constructor(value:string) {
@@ -46,7 +46,7 @@ class UserName {
     }
 }
 
-class UserRank {
+export class UserRank {
     readonly Value: Number;
 
     constructor(value:Number) {
@@ -54,7 +54,7 @@ class UserRank {
     }
 }
 
-class UserRegisteredAt {
+export class UserRegisteredAt {
     readonly Value: string;
 
     constructor() {
@@ -62,7 +62,7 @@ class UserRegisteredAt {
     }
 }
 
-class TaskId {
+export class TaskId {
     readonly Value: Number;
 
     constructor(value:Number) {
@@ -70,7 +70,7 @@ class TaskId {
     }
 }
 
-class TaskName {
+export class TaskName {
     readonly Value: string;
 
     constructor(value:string) {
@@ -78,7 +78,7 @@ class TaskName {
     }
 }
 
-class TaskDesc {
+export class TaskDesc {
     readonly Value: string;
 
     constructor(value:string) {
@@ -86,7 +86,7 @@ class TaskDesc {
     }
 }
 
-class TaskStatus {
+export class TaskStatus {
     readonly Value: Number;
 
     constructor(value:Number) {
@@ -94,19 +94,19 @@ class TaskStatus {
     }
 }
 
-class TaskCreatedAt {
-    readonly Value: string;
+export class TaskCreatedAt {
+    readonly Value: Date;
 
-    constructor() {
-        this.Value = new Date().toISOString();
+    constructor(createdat:Date) {
+        this.Value = new Date(createdat);
     }
 }
 
-class TaskUpdatedAt {
-    readonly Value: string;
+export class TaskUpdatedAt {
+    readonly Value: Date;
 
-    constructor() {
-        this.Value = new Date().toISOString();
+    constructor(updatedAt:Date) {
+        this.Value = new Date(updatedAt);
     }
 }
 
