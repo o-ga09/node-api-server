@@ -4,7 +4,7 @@ export class User {
     readonly userRank: UserRank;
     readonly userRegisteredAt: UserRegisteredAt;
 
-    constructor(id:Number,name:string,rank:Number) {
+    constructor(id:number,name:string,rank:number) {
         this.userid = new UserId(id);
         this.userName = new UserName(name);
         this.userRank = new UserRank(rank);
@@ -20,7 +20,7 @@ export class Task {
     readonly taskCreatedAt: TaskCreatedAt;
     readonly taskUpdatedAt: TaskUpdatedAt;
 
-    constructor(id:Number,name:string,desc:string,status:Number,createdAt:Date,updatedAt:Date) {
+    constructor(id:number,name:string,desc:string,status:number,createdAt:Date,updatedAt:Date) {
         this.taskId = new TaskId(id);
         this.taskName = new TaskName(name);
         this.taskDesc = new TaskDesc(desc);
@@ -31,9 +31,9 @@ export class Task {
 }
 
 export class UserId {
-    readonly Value: Number;
+    readonly Value: number;
 
-    constructor(value:Number) {
+    constructor(value:number) {
         this.Value = value;
     }
 }
@@ -47,9 +47,9 @@ export class UserName {
 }
 
 export class UserRank {
-    readonly Value: Number;
+    readonly Value: number;
 
-    constructor(value:Number) {
+    constructor(value:number) {
         this.Value = value;
     }
 }
@@ -63,9 +63,9 @@ export class UserRegisteredAt {
 }
 
 export class TaskId {
-    readonly Value: Number;
+    readonly Value: number;
 
-    constructor(value:Number) {
+    constructor(value:number) {
         this.Value = value;
     }
 }
@@ -87,9 +87,9 @@ export class TaskDesc {
 }
 
 export class TaskStatus {
-    readonly Value: Number;
+    readonly Value: number;
 
-    constructor(value:Number) {
+    constructor(value:number) {
         this.Value = value;
     }
 }
@@ -125,7 +125,7 @@ export class RequestParam {
     readonly taskDesc: TaskDesc;
     readonly taskStatus: TaskStatus;
 
-    constructor(name:string,desc:string,status:Number) {
+    constructor(name:string,desc:string,status:number) {
         this.taskName = new TaskName(name);
         this.taskDesc = new TaskDesc(desc);
         this.taskStatus = new TaskStatus(status);
