@@ -18,7 +18,7 @@ describe("タスク一覧を取得する", () => {
 });
 
 describe("タスクをIdで取得する", () => {
-    test("正常系 - 空の結果が返ること", async () => {
+    test("任意の１つのタスクが返ること", async () => {
         const taskDriver = {} as TaskDriver;
         const getByIdMock = jest.fn();
         taskDriver.getById = getByIdMock;
