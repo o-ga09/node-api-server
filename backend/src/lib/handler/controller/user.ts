@@ -1,3 +1,4 @@
+import { RequestParam } from "../../domain/entity";
 import { Usecase } from "../../usecase/usecase";
 
 export class UserController {
@@ -6,56 +7,64 @@ export class UserController {
         // eslint-disable-next-line no-unused-vars
         readonly usecase:Usecase,
     ) {}
-    getAllUsers(req: any, res: { send: (_: string) => void }) {
-        const id = req.params.id;
+    async getAllUsers(_: any, res: { send: (_: string) => void }) {
+        const tasks = await this.usecase.getAll();
 
-        console.log('===============');
-        console.log('rcv id : ' + id);
-        console.log('============== ');
-        res.send('rcv id' + id);
+        tasks.map((task) => {
+            console.log(`task${task.taskId.Value}=================`);
+            console.log("task name : " + task.taskName.Value);
+            console.log("task description : " + task.taskDesc.Value);
+            console.log("task status : " + task.taskStatus.Value);
+            console.log("task created : " + task.taskCreatedAt.Value);
+            console.log("task updated : " + task.taskUpdatedAt.Value);
+            console.log("=======================");
+        });
+        res.send('task');
     }
 
-    getById(req: any, res: { send: (_: string) => void }) {
+    async getById(req: any, res: { send: (_: string) => void }) {
         const id = req.params.id;
-
-        console.log('===============');
-        console.log('rcv id : ' + id);
-        console.log('============== ');
-        res.send('rcv id' + id);
+        const task = await this.usecase.getById(id); 
+        
+        console.log("==============");
+        console.log(task.taskId);
+        console.log(task.taskName);
+        console.log(task.taskDesc);
+        console.log(task.taskStatus);
+        console.log(task.taskCreatedAt);
+        console.log(task.taskUpdatedAt);
+        console.log("==============");
+        res.send('task');
     }
 
-    CreateUser(req: any, res: { send: (_: string) => void }) {
+    async CreateUser(req: any, res: { send: (_: string) => void }) {
         const name: string = req.body.name;
-        const password: string = req.body.password;
+        const desc: string = req.body.desc;
+        const status: number = req.body.status;
 
-        console.log('===============');
-        console.log('request name : ' + name);
-        console.log('request password : ' + password);
-        console.log('============== ');
+        const param = new RequestParam(name,desc,status);
+        const r = await this.usecase.createTask(param);
+        console.log(r);
         res.send('user registered');
     }
 
-    UpdateUser(req: any, res: { send: (_: string) => void }) {
-        const id = req.params.id;
+    async UpdateUser(req: any, res: { send: (_: string) => void }) {
+        const id:number = req.params.id;
         const name: string = req.body.name;
-        const password: string = req.body.password;
+        const desc: string = req.body.desc;
+        const status: number = req.body.status;
 
-        console.log('===============');
-        console.log('request name : ' + name);
-        console.log('request password : ' + password);
-        console.log('============== ');
+        const param = new RequestParam(name,desc,status);
+        const r = this.usecase.updatedTask(id,param);
+        console.log(r);
         res.send(`user ${id} updated`);
     }
 
-    DeleteUser(req: any, res: { send: (_: string) => void }) {
+    async DeleteUser(req: any, res: { send: (_: string) => void }) {
         const id = req.params.id;
-        const name: string = req.body.name;
-        const password: string = req.body.password;
 
-        console.log('===============');
-        console.log('request name : ' + name);
-        console.log('request password : ' + password);
-        console.log('============== ');
+        const r = await this.usecase.deleteTask(id);
+        console.log(r);
         res.send(`user ${id} deleted`);
     }
 }

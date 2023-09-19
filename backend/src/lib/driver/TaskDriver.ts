@@ -66,13 +66,12 @@ export class TaskDriverImpl implements TaskDriver {
     async updateTask(id: number, param: RequestDriverParam): Promise<ResponseDriver> {
         await this.prizma.task.update({
             where: {
-                id: id,
+                id: Number(id),
             },
             data: {
                 name: param.name,
                 desc: param.desc,
                 status: param.status,
-                createdAt: new Date(),
                 updatedAt: new Date(),
             },
         });
@@ -83,7 +82,7 @@ export class TaskDriverImpl implements TaskDriver {
     async deleteTask(id: number): Promise<ResponseDriver> {
         await this.prizma.task.delete({
             where: {
-                id: id,
+                id: Number(id),
             },
         });
         const status = new ResponseDriver("Deleted",200);
