@@ -2,3 +2,7 @@ run:
 	bun run dev
 migrate:
 	bun prisma migrate dev --name init
+up:
+	docker compose up
+down:
+	docker compose down
