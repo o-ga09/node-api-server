@@ -20,7 +20,7 @@ export class Server {
 
     Run() {
         // GET リクエスト
-        this.RootHandler.post('/', this.r.healthCheck);
+        this.RootHandler.get('/', this.r.healthCheck);
         this.UserHandler.get('/',this.u.getAllUsers.bind(this.u));
         
         // パスパラメータを取得する
