@@ -37,7 +37,7 @@ export class TaskDriverImpl implements TaskDriver {
     async getById(id: number): Promise<DriverTask> {
         const record = await this.prizma.task.findFirst({
             where: {
-                id: id,
+                id: Number(id),
             }
         });
 

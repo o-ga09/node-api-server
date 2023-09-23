@@ -19,7 +19,8 @@ export class UserController {
             console.log("task updated : " + task.taskUpdatedAt.Value);
             console.log("=======================");
         });
-        res.send('task');
+        const resJSON = JSON.stringify(tasks);
+        res.send(resJSON);
     }
 
     async getById(req: any, res: { send: (_: string) => void }) {
@@ -34,7 +35,9 @@ export class UserController {
         console.log(task.taskCreatedAt);
         console.log(task.taskUpdatedAt);
         console.log("==============");
-        res.send('task');
+
+        const resJSON = JSON.stringify(task);
+        res.send(resJSON);
     }
 
     async CreateUser(req: any, res: { send: (_: string) => void }) {
