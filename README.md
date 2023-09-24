@@ -5,7 +5,37 @@
 
 ## Theme
 
-- user registration and sign in
+- Todo app
+
+## Set up
+
+```bash
+cd backend
+make migrate
+make up
+```
+
+## How to Run
+
+```bash
+cd backend
+bun run dev
+```
+
+## How to test
+
+```bash
+cd backend
+bu run test
+```
+
+## Post Condition
+
+in Docker containainer terminal, stopped running db in ctrl + c .
+
+```bash
+make down
+```
 
 ## cURL メモ
 
