@@ -2,7 +2,6 @@ import express from 'express';
 import { RootController } from './controller/system';
 import { usecase } from '../DI/container';
 import { UserController } from './controller/user';
-import bodyParser from 'body-parser';
 
 
 export class Server {
@@ -35,7 +34,7 @@ export class Server {
         // DELETE リクエスト
         this.UserHandler.delete('/:id',this.u.DeleteUser.bind(this.u));
         
-        this.app.use(bodyParser.json());
+        this.app.use(express.json());
         this.app.use('/api/v1', this.apiRouter);
         this.app.listen(3000, () => {
           console.log('starting server :3000');

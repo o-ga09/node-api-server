@@ -1,38 +1,32 @@
-FROM oven/bun:latest
+## パッケージのインストール
+FROM node:18-alpine as desp-stage
 WORKDIR /app
-COPY ./package.json ./package-lock.json ./bun.lockb ./
-COPY src/ ./
 
-RUN bun install
-CMD ["bun","index.ts"]
-# ## パッケージのインストール
-# FROM oven/bun:alpine as desp-stage
-# WORKDIR /app
-# COPY ./package.json ./package-lock.json ./bun.lockb ./
-# RUN bun install --production
+COPY ./package.json ./package-lock.json ./
+RUN npm install
 
-# ## buildを実行
-# FROM oven/bun:alpine as build-stage
+## buildを実行
+FROM oven/bun:alpine as build-stage
 
-# WORKDIR /work
+WORKDIR /work
 
-# COPY . /work/
+COPY --from=desp-stage /app/node_modules ./work/node_modules
+COPY . /work/
 
-# RUN bun install
+## runtime環境を作成
+FROM oven/bun:alpine as runtime-stage
 
-# RUN bun run build
+ENV LANG C.UTF-8
+ENV TZ Asia/Tokyo
 
-# ## runtime環境を作成
-# FROM oven/bun:alpine as runtime-stage
+WORKDIR /app
 
-# WORKDIR /app
+COPY ./package.json ./package-lock.json ./
+COPY --from=desp-stage /app/node_modules ./work/node_modules
+COPY --from=build-stage /work/src ./src
 
-# COPY ./package.json ./package-lock.json ./
-# COPY --from=desp-stage /app/node_modules ./node_modules
-# COPY --from=build-stage /work/dist ./dist
+EXPOSE 3000
 
-# EXPOSE 3000
+ENV NODE_ENV prod
 
-# ENV NODE_ENV prod
-
-# CMD ["bun", "dist/index.js"]
+CMD ["bun", "run","dev"]
