@@ -1,7 +1,7 @@
 {
   "name": "backend",
   "module": "index.ts",
-  "type": "module",
+  "type": "commonjs",
   "devDependencies": {
     "@types/jest": "^29.5.5",
     "@typescript-eslint/eslint-plugin": "^6.7.0",
@@ -21,8 +21,8 @@
   },
   "scripts": {
     "dev": "bun src/index.ts",
-    "build": "bun build ./src/index.ts --outdir=./dist",
-    "start": "bun ./dist/index.js",
+    "build": "tsc",
+    "start": "node ./dist/index.ls",
     "test": "bun test --coverage",
     "lint": "bun eslint src/**/*.ts",
     "prettier": "bun prettier . --write",

@@ -3,18 +3,21 @@ FROM node:18-alpine as desp-stage
 WORKDIR /app
 
 COPY ./package.json ./package-lock.json ./
-RUN npm install
+RUN npm install --production --no-progress
 
 ## buildを実行
-FROM oven/bun:alpine as build-stage
+FROM node:18-alpine as build-stage
 
 WORKDIR /work
 
-COPY --from=desp-stage /app/node_modules ./work/node_modules
 COPY . /work/
 
+RUN npm install --no-progres
+
+RUN npm run build
+
 ## runtime環境を作成
-FROM oven/bun:alpine as runtime-stage
+FROM node:18-alpine as runtime-stage
 
 ENV LANG C.UTF-8
 ENV TZ Asia/Tokyo
@@ -22,11 +25,18 @@ ENV TZ Asia/Tokyo
 WORKDIR /app
 
 COPY ./package.json ./package-lock.json ./
-COPY --from=desp-stage /app/node_modules ./work/node_modules
-COPY --from=build-stage /work/src ./src
+COPY --from=desp-stage /app/node_modules ./node_modules
+COPY --from=build-stage /work/dist ./dist
+
+
+## PID1問題に対応する
+RUN apk add --no-cache tini
+ENTRYPOINT ["/sbin/tini", "--"]
+
+USER node
 
 EXPOSE 3000
 
 ENV NODE_ENV prod
 
-CMD ["bun", "run","dev"]
+CMD ["node","./dist/index.js"]
