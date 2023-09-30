@@ -18,5 +18,13 @@ model Task {
   createdAt DateTime
   updatedAt DateTime
 
-  @@map("DriverTask")
+  @@map("task")
+}
+
+model User {
+  user_id String @id
+  created_at DateTime
+  modified_at DateTime
+
+  @@map("user")
 }
