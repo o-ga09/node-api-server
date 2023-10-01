@@ -36,7 +36,7 @@ export class Server {
         
         this.app.use(express.json());
         this.app.use('/api/v1', this.apiRouter);
-        this.app.listen(3000, () => {
+        this.app.listen(8080, () => {
           console.log('starting server :3000');
         });
     }
