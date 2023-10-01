@@ -26,8 +26,8 @@ export class TaskDriverImpl implements TaskDriver {
                 record.name,
                 record.desc,
                 record.status,
-                record.createdAt,
-                record.updatedAt,
+                record.created_at,
+                record.created_at,
             );
         });
         
@@ -45,7 +45,7 @@ export class TaskDriverImpl implements TaskDriver {
             return new DriverTask(0,"","",0,new Date(),new Date());
         }
 
-        const task = new DriverTask(record?.id,record?.name,record?.desc,record?.status,record?.createdAt,record?.updatedAt);
+        const task = new DriverTask(record?.id,record?.name,record?.desc,record?.status,record?.created_at,record?.updated_at);
         return task;
     }
 
@@ -55,8 +55,8 @@ export class TaskDriverImpl implements TaskDriver {
                 name: param.name,
                 desc: param.desc,
                 status: param.status,
-                createdAt: new Date(),
-                updatedAt: new Date(),
+                created_at: new Date(),
+                updated_at: new Date(),
             },
         });
         const status = new ResponseDriver("Created",200);
@@ -72,7 +72,7 @@ export class TaskDriverImpl implements TaskDriver {
                 name: param.name,
                 desc: param.desc,
                 status: param.status,
-                updatedAt: new Date(),
+                updated_at: new Date(),
             },
         });
         const status = new ResponseDriver("Updated",200);
