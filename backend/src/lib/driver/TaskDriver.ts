@@ -27,7 +27,7 @@ export class TaskDriverImpl implements TaskDriver {
                 record.desc,
                 record.status,
                 record.created_at,
-                record.created_at,
+                record.updated_at,
             );
         });
         
@@ -96,16 +96,16 @@ export class DriverTask {
     readonly name:string;
     readonly desc:string;
     readonly status:number;
-    readonly createdAt:Date;
-    readonly updatedAt:Date;
+    readonly created_at:Date;
+    readonly updated_at:Date;
 
     constructor(id:number,name:string,desc:string,status:number,createdAt:Date,updatedAt:Date) {
         this.id = id;
         this.name = name;
         this.desc = desc;
         this.status = status;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
+        this.created_at = createdAt;
+        this.updated_at = updatedAt;
     }
 }
 

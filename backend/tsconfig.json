@@ -11,5 +11,6 @@
   "includes": [
     "src/**/*"
   ],
-  "exclude": ["src/**/**/__test__/*"] 
+  "exclude": ["src/**/**/__test__/*"],
+  "types": ["web","bun-types"]
 }

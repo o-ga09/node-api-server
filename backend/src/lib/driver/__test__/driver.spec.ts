@@ -24,8 +24,8 @@ describe("タスク一覧を取得する", () => {
               name: 'Task 1',
               desc: 'Description 1',
               status: 'Completed',
-              createdAt: new Date('2023-09-05T10:00:00Z'),
-              updatedAt: new Date('2023-09-05T11:00:00Z'),
+              created_at: new Date('2023-09-05T10:00:00Z'),
+              updated_at: new Date('2023-09-05T11:00:00Z'),
             },
             // Add more mock records as needed
         ];

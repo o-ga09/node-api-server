@@ -12,7 +12,7 @@ export class TaskGateway implements InputPort {
     async getAll(): Promise<Task[]> {
         const taskdriver = await this.driver.getAll();
         const tasks = taskdriver.map((task) => {
-            return new Task(task.id,task.name,task.desc,task.status,task.createdAt,task.updatedAt);
+            return new Task(task.id,task.name,task.desc,task.status,task.created_at,task.updated_at);
         });
 
         return tasks;
@@ -20,7 +20,7 @@ export class TaskGateway implements InputPort {
 
     async getById(id: TaskId): Promise<Task> {
         const taskdriver = await this.driver.getById(id.Value);
-        const task = new Task(taskdriver.id,taskdriver.name,taskdriver.desc,taskdriver.status,taskdriver.createdAt,taskdriver.updatedAt);
+        const task = new Task(taskdriver.id,taskdriver.name,taskdriver.desc,taskdriver.status,taskdriver.created_at,taskdriver.updated_at);
         return task;
     }
 
