@@ -22,7 +22,7 @@
   },
   "scripts": {
     "dev": "bun src/index.ts",
-    "build": "tsc",
+    "build": "npx tsc",
     "start": "node ./dist/index.ls",
     "test": "bun test --coverage",
     "lint": "bun eslint src/**/*.ts",

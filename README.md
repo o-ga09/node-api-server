@@ -1,11 +1,27 @@
 # API Server with NodeJs
 
-- TDD
-- Clean Architecture
+<img src="./doc/image.png">
 
-## Theme
+<div align="center">TDDとクリーンアーキテクチャでつくるTodo アプリAPI</div>
 
-- Todo app
+---
+
+## 🎉 使用イメージ
+
+## ⚒️ 使用技術
+
+<p>
+<img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original-wordmark.svg" alt="nodejs" width="40" height="40"/>
+<img src="./doc/express.png" width="40" height="40">
+<img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg" alt="typescript" width="40" height="40"/>
+<img src="https://www.vectorlogo.zone/logos/jestjsio/jestjsio-icon.svg" alt="jest" width="40" height="40"/>
+</p>
+
+| スタック     | ツール名   |
+| ------------ | ---------- |
+| 言語         | typescript |
+| ライブラリ   | exoress    |
+| テストツール | Jest       |
 
 ## Set up
 
@@ -35,20 +51,4 @@ in Docker containainer terminal, stopped running db in ctrl + c .
 
 ```bash
 make down
-```
-
-## cURL メモ
-
-```bash
-# GET
-curl http://localhost:3000/api/v1/users
-
-# POST
-curl -X POST -H "Content-Type: application/json" -d '{"name":"user225324","desc":"working","status":2}' http://localhost:3000/api/v1/users
-
-# PUT
-curl -X PUT -H "Content-Type: application/json" -d '{"name":"user225324","desc":"working","status":2}' http://localhost:3000/api/v1/users/1
-
-# DELETE
-curl -X DELETE http://localhost:3000/api/v1/users/1
 ```

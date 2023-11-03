@@ -9,6 +9,6 @@ db_push:
 db_deploy:
 	bun prisma migrate deploy
 up:
-	docker compose up
+	docker compose up -d
 down:
 	docker compose down
