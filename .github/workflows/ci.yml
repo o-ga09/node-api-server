@@ -18,13 +18,12 @@ jobs:
         run: |
           cd backend
           bun install
+      - name: Run test
+        run: |
+          cd backend
+          bun run test
 
       - name: Run lint
         run: |
           cd backend
           bun run lint
-      
-      - name: Run test
-        run: |
-          cd backend
-          bun run test
