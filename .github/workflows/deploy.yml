@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+    paths:
+      - "src/**/*.ts"
 
 env:
   SERVICE_NAME: ${{ secrets.SERVICE_NAME }}
@@ -20,7 +22,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      
+
       - id: "auth"
         uses: "google-github-actions/auth@v0"
         with:
@@ -37,15 +39,15 @@ jobs:
 
       - name: Push the docker image
         run: docker push ${{ env.IMAGE }}
-      
+
       - name: Deploy to Cloud Run
         run: |
-            gcloud run deploy ${{ env.SERVICE_NAME }} \
-              --image ${{ env.IMAGE }} \
-              --project ${{ env.GCP_PROJECT_ID }} \
-              --region ${{ env.GCP_REGION }} \
-              --platform=managed \
-              --allow-unauthenticated \
-              --service-account=${{ env.GCP_SERVICE_ACCOUNT }} \
-              --quiet \
-              --update-secrets=DATABASE_URL=DATABASE_URL:latest \
+          gcloud run deploy ${{ env.SERVICE_NAME }} \
+            --image ${{ env.IMAGE }} \
+            --project ${{ env.GCP_PROJECT_ID }} \
+            --region ${{ env.GCP_REGION }} \
+            --platform=managed \
+            --allow-unauthenticated \
+            --service-account=${{ env.GCP_SERVICE_ACCOUNT }} \
+            --quiet \
+            --update-secrets=DATABASE_URL=DATABASE_URL:latest \
