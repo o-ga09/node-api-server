@@ -1,32 +1,43 @@
-name: Coverage Report
+name: Test
 on:
-  pull_request:
-    branches: [main]
   push:
+  pull_request:
 jobs:
-  tests:
+  test:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-      - name: Setup Bun
-        uses: oven-sh/setup-bun@v1
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
         with:
-          bun-version: latest
+          node-version: "18"
 
+      # node_modulesのあるディレクトリに移動してください
       - name: Install dependencies
         run: |
           cd backend
-          bun install
+          npm install
 
+      # node_modulesのあるディレクトリに移動してください
       - name: Run lint
         run: |
           cd backend
-          bun run lint
+          npm run lint
 
-      - name: Run test
+      # node_modulesのあるディレクトリに移動してください
+      - name: Run Jest tests
         run: |
           cd backend
-          bun run test
+          npm run test
+
+      # pull requestの時のみカバレッジレポートをコメントする
+      - name: Coverage Report
+        uses: ArtiomTr/jest-coverage-report-action@v2.0-rc.6
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          working-directory: "."
+          test-command: "npm run test:coverage"

@@ -27,7 +27,8 @@
     "test": "bun test --coverage",
     "lint": "bun eslint src/**/*.ts",
     "prettier": "bun prettier . --write",
-    "lint-fix": "npx eslint --fix src/**/*.ts && npx prettier . --write"
+    "lint-fix": "npx eslint --fix src/**/*.ts && npx prettier . --write",
+    "test:coverage": "npm run test -- --coverage --silent --testLocationInResults --ci --json --outputFile=\"report.json\""
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
