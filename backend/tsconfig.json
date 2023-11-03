@@ -8,9 +8,7 @@
     "strict": true,
     "skipLibCheck": true
   },
-  "includes": [
-    "src/**/*"
-  ],
+  "includes": ["src/**/*"],
   "exclude": ["src/**/**/__test__/*"],
-  "types": ["web","bun-types"]
+  "types": ["web", "bun-types"]
 }
