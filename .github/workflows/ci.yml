@@ -39,5 +39,5 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          working-directory: "."
+          working-directory: "./backend"
           test-command: "npm run test:coverage"
