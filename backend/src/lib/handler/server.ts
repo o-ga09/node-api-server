@@ -1,42 +1,44 @@
 import express from 'express';
-import { RootController } from './controller/system';
+import { HealthCheckController } from './controller/system';
 import { usecase } from '../DI/container';
-import { UserController } from './controller/user';
+import { TaskController } from './controller/task';
+import { logger } from '../middleware/logger';
 
 export class Server {
   readonly app = express();
-  readonly RootHandler = express.Router();
-  readonly UserHandler = express.Router();
+  readonly HealthCheckHandler = express.Router();
+  readonly TaskHandler = express.Router();
   readonly apiRouter = express.Router();
-  readonly r = new RootController();
-  readonly u = new UserController(usecase);
-
+  readonly r = new HealthCheckController();
+  readonly t = new TaskController(usecase);
+  
   constructor() {
-    this.apiRouter.use('/', this.RootHandler);
-    this.apiRouter.use('/tasks', this.UserHandler);
+    this.apiRouter.use('/', this.HealthCheckHandler);
+    this.apiRouter.use('/tasks', this.TaskHandler);
   }
-
+  
   Run() {
+    
     // GET リクエスト
-    this.RootHandler.get('/', this.r.healthCheck);
-    this.UserHandler.get('/', this.u.getAllUsers.bind(this.u));
+    this.HealthCheckHandler.get('/', this.r.healthCheck);
+    this.TaskHandler.get('/', this.t.getAllUsers.bind(this.t));
 
     // パスパラメータを取得する
-    this.UserHandler.get('/:id', this.u.getById.bind(this.u));
+    this.TaskHandler.get('/:id', this.t.getById.bind(this.t));
 
     // POST リクエスト
-    this.UserHandler.post('/', this.u.CreateUser.bind(this.u));
+    this.TaskHandler.post('/', this.t.CreateUser.bind(this.t));
 
     // PUT リクエスト
-    this.UserHandler.put('/:id', this.u.UpdateUser.bind(this.u));
+    this.TaskHandler.put('/:id', this.t.UpdateUser.bind(this.t));
 
     // DELETE リクエスト
-    this.UserHandler.delete('/:id', this.u.DeleteUser.bind(this.u));
+    this.TaskHandler.delete('/:id', this.t.DeleteUser.bind(this.t));
 
     this.app.use(express.json());
     this.app.use('/api/v1', this.apiRouter);
     this.app.listen(8080, () => {
-      console.log('starting server :8080');
+      logger.info('starting server :8080');
     });
   }
 }

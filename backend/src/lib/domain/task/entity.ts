@@ -71,3 +71,13 @@ export class TaskUpdatedAt {
     this.Value = new Date(updatedAt);
   }
 }
+
+export class Response {
+  readonly status: string;
+  readonly code: Number;
+
+  constructor(status: string, code: Number) {
+    this.status = status;
+    this.code = code;
+  }
+}

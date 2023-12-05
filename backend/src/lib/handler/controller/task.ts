@@ -1,40 +1,22 @@
-import { RequestParam } from '../../domain/task/entity';
+import { RequestParam } from '../../domain/types';
+import { logger } from '../../middleware/logger';
 import { Usecase } from '../../usecase/usecase';
 
-export class UserController {
+export class TaskController {
   constructor(
     // eslint-disable-next-line no-unused-vars
     readonly usecase: Usecase
   ) {}
   async getAllUsers(_: any, res: { send: (_: string) => void }) {
     const tasks = await this.usecase.getAll();
-
-    tasks.map((task) => {
-      console.log(`task${task.taskId.Value}=================`);
-      console.log('task name : ' + task.taskName.Value);
-      console.log('task description : ' + task.taskDesc.Value);
-      console.log('task status : ' + task.taskStatus.Value);
-      console.log('task created : ' + task.taskCreatedAt.Value);
-      console.log('task updated : ' + task.taskUpdatedAt.Value);
-      console.log('=======================');
-    });
     const resJSON = JSON.stringify(tasks);
+    logger.info("OK");
     res.send(resJSON);
   }
 
   async getById(req: any, res: { send: (_: string) => void }) {
     const id = req.params.id;
     const task = await this.usecase.getById(id);
-
-    console.log('==============');
-    console.log(task.taskId);
-    console.log(task.taskName);
-    console.log(task.taskDesc);
-    console.log(task.taskStatus);
-    console.log(task.taskCreatedAt);
-    console.log(task.taskUpdatedAt);
-    console.log('==============');
-
     const resJSON = JSON.stringify(task);
     res.send(resJSON);
   }
@@ -47,7 +29,7 @@ export class UserController {
     const param = new RequestParam(name, desc, status);
     const r = await this.usecase.createTask(param);
     console.log(r);
-    res.send('user registered');
+    res.send("OK");
   }
 
   async UpdateUser(req: any, res: { send: (_: string) => void }) {
@@ -57,9 +39,9 @@ export class UserController {
     const status: number = req.body.status;
 
     const param = new RequestParam(name, desc, status);
-    const r = this.usecase.updatedTask(id, param);
+    const r = await this.usecase.updatedTask(id, param);
     console.log(r);
-    res.send(`user ${id} updated`);
+    res.send("OK");
   }
 
   async DeleteUser(req: any, res: { send: (_: string) => void }) {
@@ -67,6 +49,6 @@ export class UserController {
 
     const r = await this.usecase.deleteTask(id);
     console.log(r);
-    res.send(`user ${id} deleted`);
+    res.send("OK");
   }
 }

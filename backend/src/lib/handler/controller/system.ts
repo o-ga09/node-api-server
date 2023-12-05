@@ -1,6 +1,5 @@
-export class RootController {
+export class HealthCheckController {
   healthCheck(_: any, res: { send: (_: string) => void }) {
-    console.log('Hello World');
-    res.send('Hello World');
+    res.send('OK');
   }
 }
