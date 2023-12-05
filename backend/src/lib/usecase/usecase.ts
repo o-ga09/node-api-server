@@ -1,4 +1,4 @@
-import { RequestParam, Task, Response, TaskId } from '../domain/entity';
+import { RequestParam, Task, Response, TaskId } from '../domain/task/entity';
 
 export interface InputPort {
   getAll(): Promise<Task[]>;

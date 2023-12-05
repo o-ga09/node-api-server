@@ -1,4 +1,4 @@
-import { RequestParam } from '../../domain/entity';
+import { RequestParam } from '../../domain/task/entity';
 import { Usecase } from '../../usecase/usecase';
 
 export class UserController {
