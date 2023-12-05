@@ -1,4 +1,5 @@
-import { Task, RequestParam, Response, TaskId } from '../domain/task/entity';
+import { Task, Response, TaskId } from '../domain/task/entity';
+import { RequestParam } from '../domain/types';
 import { RequestDriverParam, TaskDriver } from '../driver/TaskDriver';
 import { InputPort } from '../usecase/usecase';
 
