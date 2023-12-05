@@ -13,7 +13,7 @@ export class Server {
 
   constructor() {
     this.apiRouter.use('/', this.RootHandler);
-    this.apiRouter.use('/users', this.UserHandler);
+    this.apiRouter.use('/tasks', this.UserHandler);
   }
 
   Run() {
