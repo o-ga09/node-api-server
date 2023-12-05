@@ -4,8 +4,8 @@ on:
   push:
     branches:
       - main
-    paths:
-      - "src/**/*.ts"
+    # paths:
+    #   - "src/**/*.ts"
 
 env:
   SERVICE_NAME: ${{ secrets.SERVICE_NAME }}
