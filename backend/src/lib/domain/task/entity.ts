@@ -1,17 +1,3 @@
-export class User {
-  readonly userid: UserId;
-  readonly userName: UserName;
-  readonly userRank: UserRank;
-  readonly userRegisteredAt: UserRegisteredAt;
-
-  constructor(id: number, name: string, rank: number) {
-    this.userid = new UserId(id);
-    this.userName = new UserName(name);
-    this.userRank = new UserRank(rank);
-    this.userRegisteredAt = new UserRegisteredAt();
-  }
-}
-
 export class Task {
   readonly taskId: TaskId;
   readonly taskName: TaskName;
@@ -37,37 +23,6 @@ export class Task {
   }
 }
 
-export class UserId {
-  readonly Value: number;
-
-  constructor(value: number) {
-    this.Value = value;
-  }
-}
-
-export class UserName {
-  readonly Value: string;
-
-  constructor(value: string) {
-    this.Value = value;
-  }
-}
-
-export class UserRank {
-  readonly Value: number;
-
-  constructor(value: number) {
-    this.Value = value;
-  }
-}
-
-export class UserRegisteredAt {
-  readonly Value: string;
-
-  constructor() {
-    this.Value = new Date().toISOString();
-  }
-}
 
 export class TaskId {
   readonly Value: number;
@@ -114,27 +69,5 @@ export class TaskUpdatedAt {
 
   constructor(updatedAt: Date) {
     this.Value = new Date(updatedAt);
-  }
-}
-
-export class Response {
-  readonly status: string;
-  readonly code: Number;
-
-  constructor(status: string, code: Number) {
-    this.status = status;
-    this.code = code;
-  }
-}
-
-export class RequestParam {
-  readonly taskName: TaskName;
-  readonly taskDesc: TaskDesc;
-  readonly taskStatus: TaskStatus;
-
-  constructor(name: string, desc: string, status: number) {
-    this.taskName = new TaskName(name);
-    this.taskDesc = new TaskDesc(desc);
-    this.taskStatus = new TaskStatus(status);
   }
 }
