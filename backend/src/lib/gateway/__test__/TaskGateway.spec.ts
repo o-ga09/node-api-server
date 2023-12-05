@@ -1,6 +1,7 @@
 import { DriverTask, ResponseDriver, TaskDriver } from '../../driver/TaskDriver';
 import { TaskGateway } from '../TaskGateway';
-import { RequestParam, Response, Task, TaskId } from '../../domain/entity';
+import { Response, Task, TaskId } from '../../domain/task/entity';
+import { RequestParam } from '../../domain/types';
 
 describe('タスク一覧を取得する', () => {
   test('正常系 - 空の結果が返ること', async () => {

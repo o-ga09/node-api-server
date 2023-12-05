@@ -1,5 +1,6 @@
 // import { when } from "jest-when";
-import { RequestParam, Response, Task } from '../../domain/entity';
+import { Response, Task } from '../../domain/task/entity';
+import { RequestParam } from '../../domain/types';
 import { InputPort, Usecase } from '../usecase';
 
 describe('タスク一覧を取得する', () => {
