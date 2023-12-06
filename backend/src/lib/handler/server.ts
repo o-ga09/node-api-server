@@ -21,19 +21,19 @@ export class Server {
     
     // GET リクエスト
     this.HealthCheckHandler.get('/', this.r.healthCheck);
-    this.TaskHandler.get('/', this.t.getAllUsers.bind(this.t));
+    this.TaskHandler.get('/', this.t.getAllTasks.bind(this.t));
 
     // パスパラメータを取得する
     this.TaskHandler.get('/:id', this.t.getById.bind(this.t));
 
     // POST リクエスト
-    this.TaskHandler.post('/', this.t.CreateUser.bind(this.t));
+    this.TaskHandler.post('/', this.t.CreateTask.bind(this.t));
 
     // PUT リクエスト
-    this.TaskHandler.put('/:id', this.t.UpdateUser.bind(this.t));
+    this.TaskHandler.put('/:id', this.t.UpdateTask.bind(this.t));
 
     // DELETE リクエスト
-    this.TaskHandler.delete('/:id', this.t.DeleteUser.bind(this.t));
+    this.TaskHandler.delete('/:id', this.t.DeleteTask.bind(this.t));
 
     this.app.use(express.json());
     this.app.use('/api/v1', this.apiRouter);
