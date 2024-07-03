@@ -174,3 +174,4 @@ dist
 app
 bun.lockb
 src/__test__
+.DS_Store

@@ -1,12 +1,13 @@
 import { Task, Response, TaskId } from '../domain/task/entity';
 import { RequestParam } from '../domain/types';
-import { RequestDriverParam, TaskDriver } from '../driver/TaskDriver';
-import { InputPort } from '../usecase/usecase';
+import { RequestDriverParam } from '../driver/TaskDriver';
+import { ITaskInterface } from '../usecase/interface/task';
+import { ITaskDriver } from './repository/task';
 
-export class TaskGateway implements InputPort {
-  readonly driver: TaskDriver;
+export class TaskGateway implements ITaskInterface {
+  readonly driver: ITaskDriver;
 
-  constructor(driver: TaskDriver) {
+  constructor(driver: ITaskDriver) {
     this.driver = driver;
   }
 

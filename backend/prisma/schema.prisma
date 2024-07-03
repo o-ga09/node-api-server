@@ -15,36 +15,6 @@ model User {
   @@map("user")
 }
 
-model groups {
-  id          Int       @id @default(autoincrement())
-  name        String    @db.VarChar(255)
-  description String    @db.VarChar(255)
-  date        DateTime? @db.DateTime(0)
-}
-
-model monster {
-  id               Int     @id @default(autoincrement())
-  name             String  @db.VarChar(255)
-  desc             String  @db.VarChar(255)
-  location         String? @db.VarChar(255)
-  specify          String? @db.VarChar(255)
-  weakness_attack  String? @db.VarChar(255)
-  weakness_element String? @db.VarChar(255)
-}
-
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
-model whicky_record {
-  user_id     String   @db.VarChar(80)
-  whisky_name String?  @db.VarChar(255)
-  drankAt     DateTime @db.Date
-  taste       String?  @db.VarChar(255)
-  smell       String?  @db.VarChar(255)
-  evaluate    String?  @db.VarChar(10)
-  imageUrl    String?  @db.VarChar(255)
-
-  @@ignore
-}
-
 model Task {
   id Int @default(autoincrement()) @id
   name String 

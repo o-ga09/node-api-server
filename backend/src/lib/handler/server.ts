@@ -37,8 +37,26 @@ export class Server {
 
     this.app.use(express.json());
     this.app.use('/api/v1', this.apiRouter);
-    this.app.listen(8080, () => {
+    const server = this.app.listen(8080, () => {
       logger.info('starting server :8080');
+    });
+
+    process.on('SIGTERM', () => {
+      server.close(() => {
+        logger.info('SIGTERM signal received.');
+      });
+    });
+
+    process.on('SIGINT', () => {
+      server.close(() => {
+        logger.info('SIGINT signal received.');
+      });
+    });
+
+    process.on('SIGKILL', () => {
+      server.close(() => {  
+        logger.info('SIGKILL signal received.');
+      });
     });
   }
 }

@@ -1,14 +1,14 @@
 import { PrismaClient } from '@prisma/client';
-import { ITaskDriver } from '../gateway/repository/task';
+import { IUserDriver } from '../gateway/repository/user';
 
-export class TaskDriverImpl implements ITaskDriver {
+export class UserDriverImpl implements IUserDriver {
   // eslint-disable-next-line no-unused-vars
   constructor(readonly prizma: PrismaClient) {}
 
-  async getAll(): Promise<DriverTask[]> {
+  async getAll(): Promise<DriverUser[]> {
     const records = await this.prizma.task.findMany();
     const tasks = records.map((record) => {
-      return new DriverTask(
+      return new DriverUser(
         record.id,
         record.name,
         record.desc,
@@ -21,7 +21,7 @@ export class TaskDriverImpl implements ITaskDriver {
     return tasks;
   }
 
-  async getById(id: number): Promise<DriverTask> {
+  async getById(id: number): Promise<DriverUser> {
     const record = await this.prizma.task.findFirst({
       where: {
         id: Number(id),
@@ -29,10 +29,10 @@ export class TaskDriverImpl implements ITaskDriver {
     });
 
     if (record === null) {
-      return new DriverTask(0, '', '', 0, new Date(), new Date());
+      return new DriverUser(0, '', '', 0, new Date(), new Date());
     }
 
-    const task = new DriverTask(
+    const task = new DriverUser(
       record?.id,
       record?.name,
       record?.desc,
@@ -43,7 +43,7 @@ export class TaskDriverImpl implements ITaskDriver {
     return task;
   }
 
-  async createTask(param: RequestDriverParam): Promise<ResponseDriver> {
+  async createUser(param: RequestDriverParam): Promise<ResponseDriver> {
     await this.prizma.task.create({
       data: {
         name: param.name,
@@ -57,7 +57,7 @@ export class TaskDriverImpl implements ITaskDriver {
     return status;
   }
 
-  async updateTask(id: number, param: RequestDriverParam): Promise<ResponseDriver> {
+  async updateUser(id: number, param: RequestDriverParam): Promise<ResponseDriver> {
     await this.prizma.task.update({
       where: {
         id: Number(id),
@@ -73,7 +73,7 @@ export class TaskDriverImpl implements ITaskDriver {
     return status;
   }
 
-  async deleteTask(id: number): Promise<ResponseDriver> {
+  async deleteUser(id: number): Promise<ResponseDriver> {
     await this.prizma.task.delete({
       where: {
         id: Number(id),
@@ -84,7 +84,7 @@ export class TaskDriverImpl implements ITaskDriver {
   }
 }
 
-export class DriverTask {
+export class DriverUser {
   readonly id: number;
   readonly name: string;
   readonly desc: string;

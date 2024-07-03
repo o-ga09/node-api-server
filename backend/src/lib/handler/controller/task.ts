@@ -1,11 +1,11 @@
 import { RequestParam } from '../../domain/types';
 import { logger } from '../../middleware/logger';
-import { Usecase } from '../../usecase/usecase';
+import { TaskUsecase } from '../../usecase/task';
 
 export class TaskController {
   constructor(
     // eslint-disable-next-line no-unused-vars
-    readonly usecase: Usecase
+    readonly usecase: TaskUsecase
   ) {}
   async getAllTasks(_: any, res: { send: (_: string) => void }) {
     const tasks = await this.usecase.getAll();

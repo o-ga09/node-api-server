@@ -32,8 +32,8 @@ COPY --from=build /work/prisma ./prisma
 RUN npx prisma generate
 
 ## PID1問題に対応する
-RUN apk add --no-cache tini
-ENTRYPOINT ["/sbin/tini", "--"]
+# RUN apk add --no-cache tini
+# ENTRYPOINT ["/sbin/tini", "--"]
 
 EXPOSE 8080
 
